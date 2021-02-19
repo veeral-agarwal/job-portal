@@ -28,7 +28,7 @@ Install the community edition [here](https://docs.mongodb.com/manual/installatio
 npm install -g create-react-app
 ```
 
-## Running the boilerplate
+## Running the code
 
 * Run Mongo daemon:
 ```
