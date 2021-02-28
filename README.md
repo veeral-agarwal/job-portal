@@ -44,7 +44,7 @@ npm install
 npm start
 ```
 
-* Run React Frontend:
+* Run React Frontend (open a different terminal):
 ```
 cd frontend/
 npm install
