@@ -53,3 +53,5 @@ npm start
 
 Navigate to [http://localhost:3000/](http://localhost:3000/) in your browser.
 
+## Contributions:
+Both developers and non-developers are invited to contribute to this project by adding a PR. If genuine, the changes would be approved and added to the master branch.
