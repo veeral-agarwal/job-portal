@@ -55,7 +55,8 @@ Navigate to [http://localhost:3000/](http://localhost:3000/) in your browser.
 
 ## Contributions:
 You are invited to contribute to this project by adding a PR. If genuine, the changes would be approved and added to the master branch.
-###things to be done:
+
+### can work on:
 * rating feature in both applicant and recruiter side.
 * login via facebook or google.
 * upload cv and profile picture in applicant side.
