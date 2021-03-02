@@ -54,4 +54,12 @@ npm start
 Navigate to [http://localhost:3000/](http://localhost:3000/) in your browser.
 
 ## Contributions:
-Both developers and non-developers are invited to contribute to this project by adding a PR. If genuine, the changes would be approved and added to the master branch.
+You are invited to contribute to this project by adding a PR. If genuine, the changes would be approved and added to the master branch.
+###things to be done:
+* rating feature in both applicant and recruiter side.
+* login via facebook or google.
+* upload cv and profile picture in applicant side.
+* download cv button on recruiter side,
+* show last updated profile in recruiter's and applicant's side.
+* edit job has some minor problems.
+* anything else you find intresting, open for suggession.
