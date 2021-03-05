@@ -21,7 +21,6 @@ brew install node
 
 Install the community edition [here](https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials).
 
-
 ### React
 
 ```
