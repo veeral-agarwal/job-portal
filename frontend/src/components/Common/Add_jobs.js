@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-// import React, {Component} from 'react';
-// import axios from 'axios';
 import bcrypt from 'bcryptjs';
-// import TextField from 'material-ui/TextField';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme'
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-// import Paper from 'material-ui/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import Container from '@material-ui/core/Container';

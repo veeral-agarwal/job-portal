@@ -8,7 +8,6 @@ const Applicant = require("../models/applicants");
 const Job = require("../models/Jobs");
 const Application  = require("../models/applications");
 
-// GET request 
 // Getting all the users
 router.get("/user", function(req, res) {
     User.find(function(err, users) {
@@ -20,7 +19,6 @@ router.get("/user", function(req, res) {
 	})
 });
 
-// GET request 
 // Getting all the applicants
 router.get("/applicant", function(req, res) {
     Applicant.find(function(err, applicants) {
@@ -36,7 +34,6 @@ router.get("/applicant", function(req, res) {
 router.post("/get_an_applicant_by_email",(req,res) => {
     var email = req.body.applicant_ka_email;
     var query = { email: email };
-    // var set = { $set: { status: "deleted" } };
     Applicant.findOne(query, function(err , resp){
         if (err) throw err;
     })
@@ -46,8 +43,7 @@ router.post("/get_an_applicant_by_email",(req,res) => {
         return resp;
     })
 });
-
-// GET request 
+ 
 // Getting all the recruiters
 router.get("/recruiter", function(req, res) {
     Recruiter.find(function(err, recruiters) {
@@ -63,7 +59,6 @@ router.get("/recruiter", function(req, res) {
 router.post("/get_a_recruiter_by_email",(req,res) => {
     var email = req.body.email;
     var query = { email: email };
-    // var set = { $set: { status: "deleted" } };
     Recruiter.findOne(query, function(err , resp){
         if (err) throw err;
     })
@@ -74,9 +69,6 @@ router.post("/get_a_recruiter_by_email",(req,res) => {
     })
 });
 
-// NOTE: Below functions are just sample to show you API endpoints working, for the assignment you may need to edit them
-
-// POST request 
 // Add a user to db
 router.post("/user/add", (req, res) => {
     const newUser = new User({
@@ -86,17 +78,15 @@ router.post("/user/add", (req, res) => {
         type: req.body.type,
         date: req.body.date
     });
-
     newUser.save()
-        .then(user => {
-            res.status(200).json(user);
-        })
-        .catch(err => {
-            res.status(400).send(err);
-        });
+    .then(user => {
+        res.status(200).json(user);
+    })
+    .catch(err => {
+        res.status(400).send(err);
+    });
 });
 
-// POST request 
 // Add a applicant to db
 router.post("/applicant/add", (req, res) => {
     const newApplicant = new Applicant({
@@ -110,17 +100,15 @@ router.post("/applicant/add", (req, res) => {
         image: req.body.image,
         cv:req.body.cv
     });
-
     newApplicant.save()
-        .then(applicant => {
-            res.status(200).json(applicant);
-        })
-        .catch(err => {
-            res.status(400).send(err);
-        });
+    .then(applicant => {
+        res.status(200).json(applicant);
+    })
+    .catch(err => {
+        res.status(400).send(err);
+    });
 });
 
-// POST request 
 // Add a recruiter to db
 router.post("/recruiter/add", (req, res) => {
     const newRecruiter = new Recruiter({
@@ -132,14 +120,13 @@ router.post("/recruiter/add", (req, res) => {
         bio: req.body.bio_recruiter,
         contact_number: req.body.contact_number,
     });
-
     newRecruiter.save()
-        .then(recruiter => {
-            res.status(200).json(recruiter);
-        })
-        .catch(err => {
-            res.status(400).send(err);
-        });
+    .then(recruiter => {
+        res.status(200).json(recruiter);
+    })
+    .catch(err => {
+        res.status(400).send(err);
+    });
 });
 
 //edit recruiter profile
@@ -182,7 +169,6 @@ router.post('/edit_applicant_profile', (req, res) => {
     });
 });
 
-// POST request 
 // Login
 router.post("/login", (req, res) => {
 	const email = req.body.email;
@@ -237,7 +223,6 @@ router.post("/increment_application_count",(req,res) => {
         return resp;
     })
 });
-
 
 //decrement application count of applicant 
 router.post("/decrement_application_count",(req,res) => {
@@ -405,7 +390,6 @@ router.post("/addapplication",(req,res) => {
         skills_applicant: req.body.skills,
         education_applicant: req.body.education,
         job_type: req.body.job_type,
-        // applicant_rating: req.data.rating,
     });
     lol.save()
     .then(resp => {
@@ -413,7 +397,6 @@ router.post("/addapplication",(req,res) => {
         console.log(resp);
         return resp;
     })
-
     var query = { _id: req.body.job_id };
     set = { $inc: { number_of_positions_filled: 1 } };
     Job.updateOne(query , set , function(err , resp){
@@ -424,8 +407,6 @@ router.post("/addapplication",(req,res) => {
         console.log(resp);
         return resp;
     })
-    
-
 });
 
 //check if an application is present or not
@@ -512,7 +493,6 @@ router.post("/accept_an_application",(req,res) => {
             console.log(respon);
             var gg = respon.applicant_email;
             var nodemailer = require('nodemailer');
-
             var transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -520,22 +500,19 @@ router.post("/accept_an_application",(req,res) => {
                 pass: 'veeral veeral'
             }
             });
-
             var mailOptions = {
             from: 'job.dalaaaliii@gmail.com',
             to: gg,
             subject: 'application accepted',
             text: 'wow bhaiya ;)'
             };
-
             transporter.sendMail(mailOptions, function(error, info){
             if (error) {
                 console.log(error);
             } else {
                 console.log('Email sent');
             }
-            });
-        
+            })  
         })
     })
 });
@@ -572,36 +549,33 @@ router.post("/shortlist_an_application",(req,res) => {
 
 // Add a job
 router.post('/job/add', (req, res) => {
-        console.log(req);
-        
-        Job.findOne({email_recruiter : req.body.email_recruiter , title:req.body.title})
-        .then(jobb =>{
-            let job = new Job({
-                title: req.body.title,
-                max_applications: req.body.max_applications,
-                max_positions:  req.body.max_positions,
-                deadline_of_application: req.body.deadline_of_application,
-                required_skills: req.body.required_skills,
-                type_of_job: req.body.type_of_job,
-                duration: req.body.duration,
-                salary_per_month: req.body.salary_per_month,
-                name_recruiter: req.body.name_recruiter,
-                email_recruiter: req.body.email_recruiter,
-                date_of_posting: Date.now(),
-                status: "present"
-            });
-            console.log(job);
-            job.save()
-            .then(job => {
-                res.status(200).json(job);
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(400).send(err);
-            });
+    console.log(req);
+    Job.findOne({email_recruiter : req.body.email_recruiter , title:req.body.title})
+    .then(jobb =>{
+        let job = new Job({
+            title: req.body.title,
+            max_applications: req.body.max_applications,
+            max_positions:  req.body.max_positions,
+            deadline_of_application: req.body.deadline_of_application,
+            required_skills: req.body.required_skills,
+            type_of_job: req.body.type_of_job,
+            duration: req.body.duration,
+            salary_per_month: req.body.salary_per_month,
+            name_recruiter: req.body.name_recruiter,
+            email_recruiter: req.body.email_recruiter,
+            date_of_posting: Date.now(),
+            status: "present"
+        });
+        console.log(job);
+        job.save()
+        .then(job => {
+            res.status(200).json(job);
         })
-        
-        
+        .catch(err => {
+            console.log(err);
+            res.status(400).send(err);
+        });
+    })
 });
 
 // Add a job
@@ -633,9 +607,6 @@ router.post('/job/edit', (req, res) => {
             return resp;
         });
     })
-    
-    
 });
 
 module.exports = router;
-
