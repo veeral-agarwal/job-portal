@@ -62,4 +62,4 @@ You are invited to contribute to this project by adding a PR. If genuine, the ch
 * download cv button on recruiter side,
 * show last updated profile in recruiter's and applicant's side.
 * edit job has some minor problems.
-* anything else you find intresting, open for suggession.
+* anything else you can find intresting, open for suggession.
