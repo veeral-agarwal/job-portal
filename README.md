@@ -56,10 +56,9 @@ Navigate to [http://localhost:3000/](http://localhost:3000/) in your browser.
 You are invited to contribute to this project by adding a PR. If genuine, the changes would be approved and added to the master branch.
 
 ### can work on:
-* rating feature in both applicant and recruiter side.
+* rating feature (applicant should be able to rate job, similar to applicant rating by recruiter).
 * login via facebook or google.
-* upload cv and profile picture in applicant side.
+* show profile picture.
 * download cv button on recruiter side,
-* show last updated profile in recruiter's and applicant's side.
 * edit job has some minor problems.
 * anything else you can find intresting, open for suggession.
