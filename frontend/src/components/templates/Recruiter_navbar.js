@@ -15,8 +15,8 @@ export default class Recruiter_navbar extends Component {
                     <div className="collapse navbar-collapse">
                         <ul className="navbar-nav mr-auto">
                             <li className="navbar-item">
-                                <Link to="/" className="nav-link" onClick={() => {localStorage.clear();
-                                window.location.href="/";}}>Logout</Link>
+                                <Link to="/login" className="nav-link" onClick={() => {localStorage.clear();
+                                window.location.href="/login";}}>Logout</Link>
                             </li>
                             <li className="navbar-item">
                                 <Link to="/profileedit_recruiter" className="nav-link">My recruiter Profile</Link>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import Button from 'react-bootstrap/Button'
-
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 export default class My_employees extends Component {
     
     constructor(props) {
@@ -27,7 +27,7 @@ export default class My_employees extends Component {
             const data_rec = {
                 email_rec: email
             };
-            axios.post('http://localhost:4000/router/all_my_employees', data_rec)
+            axios.post('http://localhost:4000/application/all_my_employees', data_rec)
             .then(response => {
                 console.log(response.data)
                 this.setState({listings: response.data});
@@ -233,11 +233,11 @@ export default class My_employees extends Component {
                     { 
                         this.state.listings.map((application, i) => {
                             const kaha_jana = {
-                                pathname: "/my-employees/"+application._id,
+                                pathname: "/my-employees/"+application.applicant_email,
                             }
                             var vivi = null;
                             // if(application.status === "accepted"){
-                                vivi = <td> <Button disabled variant="danger" onClick={() => { }}>rate</Button></td>
+                                vivi = <td> <Link to={kaha_jana} ><Button  variant="danger" onClick={() => { }}>rate</Button></Link></td>
                             // }
                             return (
                                 <tr key={i} rate_recrutier = {this.rate_recruiter}>

@@ -34,7 +34,8 @@ export default class Register extends Component {
             startyear:'',
             endyear:'',
             image:'',
-            cv:''
+            cv:'',
+            success:0
         }
 
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -120,7 +121,7 @@ export default class Register extends Component {
             password: this.state.password
         }
         console.log(userAdd)
-        axios.get('http://localhost:4000/router/user', userAdd)
+        axios.get('http://localhost:4000/user/user', userAdd)
         .then(res => { 
             var tmpflag = 0
             var temp = "none";
@@ -164,8 +165,10 @@ export default class Register extends Component {
                     if(this.state.type === "recruiter"){
                         if(this.state.bio_recruiter.split(' ').length < 251 && this.state.contact_number.length === 10){
                             console.log("lololol");
-                            axios.post('http://localhost:4000/router/recruiter/add', newUser)
+                            axios.post('http://localhost:4000/recruiter/recruiter/add', newUser)
                             .then(res => {alert("Created recruiter\t" + res.data.name);console.log(res.data)
+                            this.setState({success:1})
+                            console.log("sucess updated")
                             })
                             .catch(err => { 
                                 console.log(err) 
@@ -177,8 +180,10 @@ export default class Register extends Component {
                     }
                     else if(this.state.type === "applicant"){
                         if(this.state.list_of_languages !== ''){
-                            axios.post('http://localhost:4000/router/applicant/add', newUser)
+                            axios.post('http://localhost:4000/applicant/applicant/add', newUser)
                             .then(res => {alert("Created applicant\t" + res.data.name);console.log(res.data)
+                            this.setState({success:1})
+                            console.log("sucess updated")
                             })
                             .catch(err => { 
                                 console.log(err) 
@@ -188,7 +193,7 @@ export default class Register extends Component {
                             alert("fill all components");
                         }
                     }
-                    axios.post('http://localhost:4000/router/user/add', newUser)
+                    axios.post('http://localhost:4000/user/register', newUser)
                 }
                 else if(this.state.password.length<6){
                     alert("password length should be atleast 6");console.log("short password");
@@ -222,7 +227,7 @@ export default class Register extends Component {
     onChangeimage = e => {
 		const vivi = new FileReader();
 		vivi.onload = function() {
-			this.setState({ image: vivi.result });
+			this.setState({ image: e.target.files[0] });
 		}.bind(this);
 		vivi.readAsDataURL(e.target.files[0]);
 	};
@@ -232,7 +237,7 @@ export default class Register extends Component {
 		vivi.onload = function() {
 			this.setState({ cv: vivi.result });
 		}.bind(this);
-		vivi.readAsDataURL(e.target.files[0]);
+        vivi.readAsDataURL(e.target.files[0]);
 	};
 
     onSubmitEdu(e){
@@ -296,28 +301,28 @@ export default class Register extends Component {
                             <div className="form-group">
                                 <input type="submit" value="ADD" className="btn btn-primary" onClick={this.onSubmitEdu}/>
                             </div>
-                            <label>Select profile photo:</label>
+                            {/* <label>Select profile photo:</label> */}
                             {/* <br></br>
                             <br></br> */}
-                                <input
+                                {/* <input
                                     type="file"
                                     onChange={this.onChangeimage}
                                     // value={this.state.image}
                                     id="image"
                                     name="image"
-                                ></input>
+                                ></input> */}
                             </div>
                             <div className="form-group">
-                            <label>upload cv</label>
+                            {/* <label>upload cv</label> */}
                             {/* <br></br>
                             <br></br> */}
-                                <input
+                                {/* <input
                                     type="file"
                                     onChange={this.onChangecv}
                                     // value={this.state.image}
                                     id="file"
                                     name="file"
-                                ></input>
+                                ></input> */}
                             </div>
                             
                         </div>
@@ -348,6 +353,7 @@ export default class Register extends Component {
             </div>
         }
         return (
+            this.state.success == 1 ? window.location.href='/login' :
             <Container  component="main" maxWidth="xs">
                 <CssBaseline /> 
                 <div className="form-group"/>

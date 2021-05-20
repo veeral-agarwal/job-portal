@@ -21,7 +21,7 @@ export default class Joblistings extends Component {
             const data_rec = {
                 email_rec: email
             };
-            axios.post('http://localhost:4000/router/job/view', data_rec)
+            axios.post('http://localhost:4000/job/job/view', data_rec)
             .then(response => {
                 console.log(response.data)
                 this.setState({listings: response.data});
@@ -39,7 +39,7 @@ export default class Joblistings extends Component {
 
 
     deletejob(id) {
-        axios.post('http://localhost:4000/router/job/delete',{'id': id})
+        axios.post('http://localhost:4000/job/job/delete',{'id': id})
         .then(response => { 
             console.log(response.data)
         });

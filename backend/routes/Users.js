@@ -6,7 +6,11 @@ const User = require("../models/Users");
 
 // GET request 
 // Getting all the users
-router.get("/", function(req, res) {
+router.get("/s", function(req, res) {
+	res.send("API is working properly !");
+});
+
+router.get("/user", function(req, res) {
     User.find(function(err, users) {
 		if (err) {
 			console.log(err);
@@ -16,7 +20,41 @@ router.get("/", function(req, res) {
 	})
 });
 
-// NOTE: Below functions are just sample to show you API endpoints working, for the assignment you may need to edit them
+// Add a user to db
+// router.post("/user/add", (req, res) => {
+//     const newUser = new User({
+//         name: req.body.name,
+//         email: req.body.email,
+//         password: req.body.password,
+//         type: req.body.type,
+//         date: req.body.date
+//     });
+//     newUser.save()
+//     .then(user => {
+//         res.status(200).json(user);
+//     })
+//     .catch(err => {
+//         res.status(400).send(err);
+//     });
+// });
+router.post("/updateuser", (req, res) => {
+    console.log(req.body.email)
+    console.log(req.body.name)
+    var query = { email:req.body.email };
+    var set = { $set:{
+        name: req.body.name,
+    }}
+    User.updateOne(query , set, function(err, resp){
+        if (err) throw err;
+    })
+    .then(resp => {
+        res.status(200).json(resp);
+        console.log(resp);
+        
+});
+})
+
+
 
 // POST request 
 // Add a user to db
@@ -51,11 +89,13 @@ router.post("/login", (req, res) => {
 			});
         }
         else{
-            res.send("Email Found");
+            res.status(200).json(user);
+            console.log(user);
             return user;
         }
 	});
 });
+
 
 module.exports = router;
 

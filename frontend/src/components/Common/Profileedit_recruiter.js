@@ -20,17 +20,7 @@ export default class Profileedit_recruiter extends React.Component {
         super(props);
 
         this.state = {
-            // title: '',
-            // name_recrutier: '',
-            // email_recruiter: '',
-            // max_applications: '',
-            // max_positions: '',
-            // deadline_of_application: '', //take input as string (day month year hour minutes).
-            // required_skills: '',
-            // type_of_job: 'full_time',
-            // duration: '0',
-            // salary_per_month: '',
-            // date_of_posting: Date.now()
+         
             bio:'',
             contact_number:'',
             name:''
@@ -84,6 +74,20 @@ export default class Profileedit_recruiter extends React.Component {
     // onChangesalary_per_month(event) {
     //     this.setState({ salary_per_month: event.target.value });
     // }
+    componentDidMount()
+    {   
+        console.log(localStorage)
+        var mail=localStorage.getItem("user_email")
+        console.log(mail)
+        axios.post('http://localhost:4000/recruiter/get_a_recruiter_by_email',{"email":mail})
+        .then(res => {this.setState({user:res.data})
+        console.log(this.state.user)
+        this.setState({name:this.state.user.name})
+        this.setState({email:this.state.user.email})
+        this.setState({bio:this.state.user.bio})
+        this.setState({contact_number:this.state.user.contact_number})
+    })
+    };
 
     onSubmit(e) {
         e.preventDefault();
@@ -116,10 +120,20 @@ export default class Profileedit_recruiter extends React.Component {
         }       
         else{
             if(this.state.contact_number.length === 10 && this.state.bio.split(' ').length < 251){
-                axios.post('http://localhost:4000/router/edit_recruiter_profile',newrec)
+                axios.post('http://localhost:4000/recruiter/edit_recruiter_profile',newrec)
                 .then(res => {
                     alert("profile successfully edited");
                     console.log(res.data)
+                })
+                .catch(function(error) {
+                    console.log(error);
+                })
+                axios.post('http://localhost:4000/user/updateuser',newrec)
+                .then(res => {
+                    
+                    console.log(res.data)
+                    localStorage.setItem('user_name', this.state.name);
+                    console.log(localStorage)
                 })
                 .catch(function(error) {
                     console.log(error);

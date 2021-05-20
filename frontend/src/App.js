@@ -54,10 +54,10 @@ class App extends React.Component{
               return <Profileedit_recruiter/>
             }
             else{
-              return <Home/>
+              return <Login/>
             }
           }} />
-          <Route path="/" exact component={Home}/>
+          
           <Route path="/users" exact component={UsersList}/>
           <Route path="/register" component={Register}/>
           <Route path="/profile" component={Profile}/>

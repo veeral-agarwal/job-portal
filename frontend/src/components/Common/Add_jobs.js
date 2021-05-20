@@ -95,7 +95,7 @@ export default class Add_job extends React.Component {
             window.location.reload();
         }
         else{
-            axios.post('http://localhost:4000/router/job/add',newJob)
+            axios.post('http://localhost:4000/job/job/add',newJob)
             .then(res => {
                 alert("job successfully added");
                 console.log(res.data)

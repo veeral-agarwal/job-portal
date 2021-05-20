@@ -31,7 +31,7 @@ class UsersList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/user')
+        axios.get('http://localhost:4000/user/user')
              .then(response => {
                  this.setState({users: response.data, sortedUsers:response.data});
              })

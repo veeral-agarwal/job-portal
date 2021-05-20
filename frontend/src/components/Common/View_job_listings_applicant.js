@@ -44,7 +44,7 @@ export default class View_job_listings_applicant extends Component {
             const data_rec = {
                 email_rec: email
             };
-            axios.get('http://localhost:4000/router/job/view_for_applicant', data_rec)
+            axios.get('http://localhost:4000/job/job/view_for_applicant', data_rec)
             .then(response => {
                 console.log(response.data)
                 this.setState({jobs: response.data});
@@ -56,7 +56,7 @@ export default class View_job_listings_applicant extends Component {
             const newval = {
                 applicant_email: localStorage.getItem("user_email")
             }
-            axios.post("http://localhost:4000/router/all_applied_jobs",newval)
+            axios.post("http://localhost:4000/application/all_applied_jobs",newval)
              .then(response =>{
                 this.setState({applied_jobs: response.data});
              })

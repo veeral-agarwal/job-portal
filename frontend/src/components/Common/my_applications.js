@@ -19,7 +19,7 @@ export default class My_applications extends Component {
             const data_rec = {
                 email_rec: email
             };
-            axios.post('http://localhost:4000/router/all_my_applications', data_rec)
+            axios.post('http://localhost:4000/application/all_my_applications', data_rec)
             .then(response => {
                 console.log(response.data)
                 this.setState({listings: response.data});

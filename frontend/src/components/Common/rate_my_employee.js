@@ -34,67 +34,22 @@ export default class Rate_applicant extends Component {
     componentDidMount(){
         console.log("ko")
         const chunk = { 
-            email: this.props.match.params.applicant_email,
+            email: this.props.match.params.id,
             // applicant_email: localStorage.getItem("user_email"),
             // recruiter_email: 
         }
-        // console.log(chunk.id)
-        axios.post('http://localhost:4000/router/opop',chunk)
+        console.log(this.props.match.params)
+        console.log(chunk)
+        axios.post('http://localhost:4000/router/opop',chunk)  //this is unused
         .then(res => {
             console.log("jii")
             var temper = 0;
-            // for(var i = 0 ; i<res["data"].length ; i++){
-            //     if(res["data"][i]["job_id"] === this.props.match.params.id && res["data"][i]["applicant_email"] === localStorage.getItem("user_email") &&  res["data"][i]["status"] === "applied"){
-            //         this.setState({lololol: true});
-            //         console.log(this.state.lololol)
-            //         break;
-            //     }
-            //     else{
-            //         temper = 0;
-            //         console.log("lop")
-            //     }
-            // }
-            // var rat = res.data;
-            // console.log(rat.status)
-            // if(res.data.status === "applied")
-            // this.setState({lololol:true});
-            // console.log(this.state.lololol)
+
         })
         .catch(err => {
             console.log(err);
         });
-        // axios.post('http://localhost:4000/router/get_a_job_by_id', chunk)
-        // .then(res => {
-        //     console.log(res.data);
-        //     this.setState({job: res.data});
-            
-        //     this.setState({lololol: true});
-        // })
-        // .catch(err =>
-        //     {
-        //         // if(err.response.data.message)
-        //         // alert(err.response.data.message);
-        //         console.log(err)
-        // });
-
-        // getting the data of this applicant
-        // const applicant_ka_data = {
-        //     applicant_ka_email: localStorage.getItem("user_email")
-        // }
-        // axios.post('http://localhost:4000/router/get_an_applicant_by_email', applicant_ka_data)
-        // .then(res => {
-        //     console.log(res.data);
-        //     this.setState({applicant_data: res.data});
-            
-        //     this.setState({lololol: true});
-        // })
-        // .catch(err =>
-        //     {
-        //         // if(err.response.data.message)
-        //         // alert(err.response.data.message);
-        //         console.log(err)
-        // });
-
+        
     }    
     
     async onSubmit(e){
@@ -104,59 +59,40 @@ export default class Rate_applicant extends Component {
             id: this.props.match.params.id
         }
         
-            // console.log(temper)
-            // if(temper === 0){
-                
-                // axios.post('http://localhost:4000/router/get_a_job_by_id', chunk)
-                //     .then(res => {
-                //         console.log(res.data);
-                //         this.setState({job: res.data});
-                        
-                //         this.setState({lololol: true});
-                //     })
-                //     .catch(err =>
-                //         {
-                //             // if(err.response.data.message)
-                //             // alert(err.response.data.message);
-                //             console.log(err)
-                //         });
             var veer = true;
 
-            // if(this.state.sop.split(' ').length>250){
-            //     window.alert("word limit crossed");
-            //     veer = false;
-            // }
-            // else if(veer && this.state.sop === ''){
-            //     window.alert("enter statement of purpose");
-            // }
-            // else if(this.state.applicant_data.application_count >20){
-            //     alert("max application limit reached");
-            // }
             {
 
                 
 
 
                 const yoyo = {
-                    // sop: this.state.sop,
-                    // email_recruiter: this.state.job.email_recruiter,
-                    // name_recruiter: this.state.job.name_recruiter,
-                    // deadline_of_application: this.state.job.deadline_of_application,
-                    // job_salary_per_month: this.state.job.salary_per_month,
-                    // status_of_job:this.state.job.status,
-                    // job_id: this.state.job._id,
-                    // applicant_email: localStorage.getItem("user_email"),
-                    // status: "applied",
-                    // job_title: this.state.job.title,
-                    // name_applicant:localStorage.getItem("user_name"),
-                    // skills: this.state.applicant_data.list_of_languages,
-                    // education: this.state.applicant_data.education,
-                    // job_type:this.state.job.type_of_job,
-                    // rating: this.state.applicant_data.rating,
-                    email : this.props.match.params.applicant_email,
+
+                    email : this.props.match.params.id,
+                    value : this.state.rating
                 }
                 console.log(yoyo);
-                await axios.post('http://localhost:4000/router/rate_an_applicant', yoyo)
+
+                var temp = {
+                    applicant_ka_email : this.props.match.params.id,
+                }
+
+                await axios.post('http://localhost:4000/Applicant/get_an_applicant_by_email', temp) //no such route found
+                .then(res => {
+                    console.log(res.data);
+                    var ratecount = res.data.rate_count
+                    var rate = res.data.rating
+                    var newrating = (rate*ratecount+this.state.rating)/(ratecount+1)
+                    ratecount+=1
+                    var doupdate = {
+                        email:this.props.match.params.id,
+                        rate_count:ratecount,
+                        rating:newrating
+                    }
+                    this.setState({
+                        rating:newrating
+                    });
+                    axios.post('http://localhost:4000/Applicant/rate_an_applicant', doupdate) //no such route found
                     .then(res => {
                         console.log(res.data);
                         // this.setState({jobs: res.data});
@@ -168,24 +104,24 @@ export default class Rate_applicant extends Component {
                             // alert(err.response.data.message);
                             console.log(err)
                         });
-                
-                
-                // await axios.post('http://localhost:4000/router/increment_application_count', {email: localStorage.getItem("user_email")})
-                // .then(res => {
-                //     console.log(res.data);
-                //     // this.setState({jobs: res.data});
+                    // this.setState({jobs: res.data});
                     
-                // })
-                // .catch(err =>
-                //     {
-                //         // if(err.response.data.message)
-                //         // alert(err.response.data.message);
-                //         console.log(err)
-                //     });
-
-                    this.setState({
-                        rating:5
+                })
+                .catch(err =>
+                    {
+                        // if(err.response.data.message)
+                        // alert(err.response.data.message);
+                        console.log(err)
                     });
+
+
+
+                
+                
+              
+                    // this.setState({
+                    //     rating:newrating
+                    // });
                     this.props.history.push('/job-listings');
             }
     }

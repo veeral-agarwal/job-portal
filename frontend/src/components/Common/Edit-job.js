@@ -101,7 +101,7 @@ export default class Edit_job extends React.Component {
             window.location.reload();
         }
         else{
-            axios.post('http://localhost:4000/router/job/edit',newJob)
+            axios.post('http://localhost:4000/job/job/edit',newJob)
             .then(res => {
                 alert("job successfully edited");
                 console.log(res.data)

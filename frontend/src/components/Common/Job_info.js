@@ -42,7 +42,7 @@ export default class Job_info extends Component {
             // recruiter_email: 
         }
         console.log(chunk.id)
-        axios.post('http://localhost:4000/router/app_p_or_n',{id: this.props.match.params.id})
+        axios.post('http://localhost:4000/application/app_p_or_n',{id: this.props.match.params.id})
         .then(res => {
             console.log("jii")
             var temper = 0;
@@ -66,7 +66,7 @@ export default class Job_info extends Component {
         .catch(err => {
             console.log(err);
         });
-        axios.post('http://localhost:4000/router/get_a_job_by_id', chunk)
+        axios.post('http://localhost:4000/job/get_a_job_by_id', chunk)
         .then(res => {
             console.log(res.data);
             this.setState({job: res.data});
@@ -84,7 +84,7 @@ export default class Job_info extends Component {
         const applicant_ka_data = {
             applicant_ka_email: localStorage.getItem("user_email")
         }
-        axios.post('http://localhost:4000/router/get_an_applicant_by_email', applicant_ka_data)
+        axios.post('http://localhost:4000/applicant/get_an_applicant_by_email', applicant_ka_data)
         .then(res => {
             console.log(res.data);
             this.setState({applicant_data: res.data});
@@ -155,10 +155,10 @@ export default class Job_info extends Component {
                     skills: this.state.applicant_data.list_of_languages,
                     education: this.state.applicant_data.education,
                     job_type:this.state.job.type_of_job,
-                    // rating: this.state.applicant_data.rating,
+                    rating: this.state.applicant_data.rating,
                 }
                 console.log(yoyo);
-                await axios.post('http://localhost:4000/router/addapplication', yoyo)
+                await axios.post('http://localhost:4000/application/addapplication', yoyo)
                     .then(res => {
                         console.log(res.data);
                         // this.setState({jobs: res.data});
@@ -170,7 +170,7 @@ export default class Job_info extends Component {
                         });
                 
                 
-                await axios.post('http://localhost:4000/router/increment_application_count', {email: localStorage.getItem("user_email")})
+                await axios.post('http://localhost:4000/applicant/increment_application_count', {email: localStorage.getItem("user_email")})
                 .then(res => {
                     console.log(res.data);
                     // this.setState({jobs: res.data});

@@ -47,7 +47,7 @@ export default class Job_application_info extends Component {
                 email_recruiter: localStorage.getItem("user_email"), 
             }
             console.log(chunk.id)
-            axios.post('http://localhost:4000/router/all_my_non-rejected_applications_of_perticular_job',chunk)
+            axios.post('http://localhost:4000/application/all_my_non-rejected_applications_of_perticular_job',chunk)
             .then(res => {
                 console.log(res.data)
                 var temper = 0;
@@ -60,14 +60,14 @@ export default class Job_application_info extends Component {
     }    
     
     async reject(id , mail ){
-        axios.post('http://localhost:4000/router/reject_an_application',{id:id})
+        axios.post('http://localhost:4000/application/reject_an_application',{id:id})
         .then(res => {
             console.log(res.data)
         })
         .catch(err => {
             console.log(err);
         });
-        axios.post('http://localhost:4000/router/decrement_application_count', {email: mail})
+        axios.post('http://localhost:4000/application/decrement_application_count', {email: mail})
         .then(res => {
             console.log(res.data);
         })
@@ -79,7 +79,7 @@ export default class Job_application_info extends Component {
     }
 
     accept(id){
-        axios.post('http://localhost:4000/router/accept_an_application',{id:id })
+        axios.post('http://localhost:4000/application/accept_an_application',{id:id })
         .then(res => {
             console.log(res.data)            
         })
@@ -90,7 +90,7 @@ export default class Job_application_info extends Component {
     }
 
     shortlist(id){
-        axios.post('http://localhost:4000/router/shortlist_an_application',{id:id})
+        axios.post('http://localhost:4000/application/shortlist_an_application',{id:id})
         .then(res => {
             console.log(res.data)            
         })
